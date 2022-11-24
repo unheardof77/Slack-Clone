@@ -1,0 +1,27 @@
+{
+  "name": "slack-clone",
+  "version": "1.0.0",
+  "description": "This is a clone of the popular messaging app, Slack.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server --ignore client",
+    "develop": "concurrently \"cd server && npm run start\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unheardof77/Slack-Clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unheardof77/Slack-Clone/issues"
+  },
+  "homepage": "https://github.com/unheardof77/Slack-Clone#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
