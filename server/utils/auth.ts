@@ -1,15 +1,13 @@
-const jwt = require('jsonwebtoken');
-const Express = require('express')
+import jwt from 'jsonwebtoken';
+import { Request } from 'express';
 
 const secret = 'mysecretsshhhhh';
 const expiration = '2h';
+import 'dotenv';
 
-export interface TypedRequestBody<T> extends Express.Request {
-    body: T
-}
 
 module.exports = {
-    authMiddleware: function ({ req }) {
+    authMiddleware: function ({ req }: Request<{}, any, any, QueryString.ParsedQs, Record<string, any>>) {
         // allows token to be sent via req.body, req.query, or headers
         let token = req.body.token || req.query.token || req.headers.authorization;
 
@@ -23,7 +21,7 @@ module.exports = {
         }
 
         try {
-            const { data } = jwt.verify(token, secret, { maxAge: expiration });
+            const  data  = jwt.verify(token, secret, { maxAge: expiration });
             req.user = data;
         } catch {
             console.log('Invalid token');

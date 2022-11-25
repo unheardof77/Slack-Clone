@@ -23,5 +23,8 @@
   "homepage": "https://github.com/unheardof77/Slack-Clone#readme",
   "dependencies": {
     "concurrently": "^7.6.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0"
   }
 }
