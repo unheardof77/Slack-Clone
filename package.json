@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/unheardof77/Slack-Clone#readme",
   "dependencies": {
-    "concurrently": "^7.6.0"
+    "concurrently": "^7.6.0",
+    "graphql-ws": "^5.11.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0"
