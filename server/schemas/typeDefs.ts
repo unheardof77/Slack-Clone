@@ -2,14 +2,14 @@ import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
     type Message {
-        _id: _id
-        user: _id
+        _id: ID
+        user: ID
         message: String
-        sentAt: Date
+        sentAt: String
     }
 
     type User {
-        _id: _id
+        _id: ID
         username: String
         password: String
         ChatRooms: [ChatRoom]!
@@ -17,13 +17,29 @@ const typeDefs = gql`
     }
 
     type ChatRoom{
-        _id: _id
+        _id: ID
         name: String
         members: [User]!
         messages: [Message]!
     }
+
+    type Auth {
+        token: ID
+        user: User
+    }
+
+    type Query {
+        getChatRooms: [ChatRoom]
+        getUser: User
+    }
+
+    type Mutation {
+        login(username:String!, password:String!): Auth
+        signup(username:String!, password:String!): Auth
+    }
+
     type Subscription {
-        messageSent(roomID: _id!, message:string!): Chatroom
+        messageSent(roomID: ID!, message:String!): ChatRoom
     }
 `;
 

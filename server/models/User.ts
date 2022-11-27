@@ -1,5 +1,18 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model, Model } from "mongoose";
 import bcrypt from "bcrypt";
+
+export interface userInt {
+    username:string;
+    password:string;
+    ChatRooms:mongoose.ObjectId[];
+    friends:mongoose.ObjectId[];
+    _id:mongoose.Types.ObjectId
+}
+interface userMethods {
+    isCorrectPassword(password:string): boolean;
+};
+
+type UserModel = Model<userInt, {}, userMethods>;
 
 const userSchema = new Schema({
     username:{
@@ -36,10 +49,10 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
-userSchema.methods.isCorrectPassword = function (password:string) {
-    return bcrypt.compare(password, this.password);
-};
+userSchema.method('isCorrectPassword', async function isCorrectPassword(password:string) {
+    return await bcrypt.compare(password, this.password);
+});
 
-const User = model('User', userSchema);
+const User = model<userInt, UserModel>('User', userSchema);
 
 export default User;

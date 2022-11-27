@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react"
 
 interface sendBarProp{
-    recipient: string
+    recipient: [string]
 
 };
 

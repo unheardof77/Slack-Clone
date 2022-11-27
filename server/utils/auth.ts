@@ -1,37 +1,47 @@
 import jwt from 'jsonwebtoken';
-import { Request } from 'express';
 
-const secret = 'mysecretsshhhhh';
-const expiration = '2h';
-import 'dotenv';
+import mongoose from 'mongoose';
+
+import * as dotenv from 'dotenv'
+dotenv.config()
+
+const secret:any = process.env.SECRET;
+const expiration = process.env.EXPIRATION;
+
+interface authMiddlewareProp {
+    req: any
+}
+
+interface signTokenProp {
+    username: string
+    ChatRooms: mongoose.Schema.Types.ObjectId[]
+    friends: mongoose.Schema.Types.ObjectId[]
+    _id: mongoose.Types.ObjectId
+}
 
 
-module.exports = {
-    authMiddleware: function ({ req }: Request<{}, any, any, QueryString.ParsedQs, Record<string, any>>) {
-        // allows token to be sent via req.body, req.query, or headers
-        let token = req.body.token || req.query.token || req.headers.authorization;
+export const authMiddleware = function ({ req }:authMiddlewareProp) {
+    let token = req.headers.authorization;
 
-        // ["Bearer", "<tokenvalue>"]
-        if (req.headers.authorization) {
-            token = token.split(' ').pop().trim();
-        }
+    if (req.headers.authorization) {
+        token = token.split(' ').pop().trim();
+    };
 
-        if (!token) {
-            return req;
-        }
-
-        try {
-            const  data  = jwt.verify(token, secret, { maxAge: expiration });
-            req.user = data;
-        } catch {
-            console.log('Invalid token');
-        }
-
+    if (!token) {
         return req;
-    },
-    signToken: function ({ firstName, email, _id }) {
-        const payload = { firstName, email, _id };
+    };
 
-        return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
-    },
-};
+    try {
+        const  data  = jwt.verify(token, secret, { maxAge: expiration });
+        console.log(data);
+        req.user = data;
+    } catch {
+        console.log('Invalid token');
+    }
+
+    return req;
+}
+export const signToken = function ({ username, ChatRooms, friends, _id }:signTokenProp) {
+    const payload = { username, ChatRooms, friends, _id };
+    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+}

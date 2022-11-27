@@ -2,9 +2,10 @@
   "name": "slack-clone",
   "version": "1.0.0",
   "description": "This is a clone of the popular messaging app, Slack.",
-  "main": "index.js",
+  "main": "server.ts",
+  "type": "module",
   "scripts": {
-    "start": "node server --ignore client",
+    "start": "node server/server.ts --ignore client",
     "develop": "concurrently \"cd server && npm run start\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",

@@ -12,9 +12,9 @@
   },
   "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.ts",
   "scripts": {
-    "start": "node server.js"
+    "start": "npx ts-node ./server.ts"
   },
   "keywords": [],
   "author": "",

@@ -3,10 +3,17 @@ import { ApolloServer } from 'apollo-server-express';
 import path from 'path';
 import db from './config/connection';
 
+import typeDefs from './schemas/typeDefs';
+import resolvers from './schemas/resolvers';
+
+import { authMiddleware } from './utils/auth';
+
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = new ApolloServer({
-
+    typeDefs,
+    resolvers,
+    context: authMiddleware
 });
 
 app.use(express.urlencoded({extended: false}));
