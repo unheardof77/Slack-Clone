@@ -12,6 +12,8 @@ import { createClient } from 'graphql-ws';
 import { split, HttpLink } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 
+import Signup from './Pages/Signup/Signup';
+
 const httpLink = new HttpLink({
   uri: 'graphql'
 });
@@ -55,7 +57,7 @@ function App() {
           <Routes>
             <Route path='/'/>
             <Route path='/login'/>
-            <Route path='/signUp'/>
+            <Route path='/signUp' element={<Signup/>}/>
           </Routes>
         </StateProvider>
       </Router>
