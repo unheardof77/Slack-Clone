@@ -9,7 +9,10 @@ const StateContext = createContext<StateContextInterface | null>(null);
 const { Provider } = StateContext;
 
 const StateProvider = ({value = [], ...props})=>{
-    const [state, dispatch] = useStateReducer({});
+    const [state, dispatch] = useStateReducer({
+        userId:'',
+        
+    });
 
     return <Provider value={[state, dispatch]} {...props} />;
 };
@@ -17,4 +20,5 @@ const StateProvider = ({value = [], ...props})=>{
 const useStateContext = () => {
     return useContext(StateContext);
 };
+
 export { StateProvider, useStateContext };

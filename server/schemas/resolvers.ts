@@ -31,7 +31,7 @@ const resolvers = {
             const user = await User.findOne({ username });
 
             if (!user) {
-                throw new AuthenticationError('Incorrect credentials');
+                throw new AuthenticationError('No account found.');
             }
 
             const correctPw = user.isCorrectPassword(password);
@@ -46,7 +46,7 @@ const resolvers = {
         }
     },
     Subscription:{
-        messageSent: () => {}
+        onMessageSent: () => {}
     }
 };
 

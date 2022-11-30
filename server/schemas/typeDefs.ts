@@ -39,7 +39,7 @@ const typeDefs = gql`
     }
 
     type Subscription {
-        messageSent(roomID: ID!, message:String!): ChatRoom
+        onMessageSent(roomID: ID!, message:String!): ChatRoom
     }
 `;
 

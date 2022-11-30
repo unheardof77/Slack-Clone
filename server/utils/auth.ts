@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
 import mongoose from 'mongoose';
 
@@ -20,6 +20,7 @@ interface signTokenProp {
 }
 
 
+
 export const authMiddleware = function ({ req }:authMiddlewareProp) {
     let token = req.headers.authorization;
 
@@ -32,7 +33,7 @@ export const authMiddleware = function ({ req }:authMiddlewareProp) {
     };
 
     try {
-        const  data  = jwt.verify(token, secret, { maxAge: expiration });
+        const   {data}:any   = jwt.verify(token, secret, { maxAge: expiration });
         console.log(data);
         req.user = data;
     } catch {
