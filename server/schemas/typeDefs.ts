@@ -21,6 +21,7 @@ const typeDefs = gql`
         name: String
         members: [User]!
         messages: [Message]!
+        isPrivateMessage: boolean
     }
 
     type Auth {
@@ -29,13 +30,17 @@ const typeDefs = gql`
     }
 
     type Query {
-        getChatRooms: [ChatRoom]
+        getChatRooms: [ChatRoom]!
         getUser: User
+        getOneChatRoom(_id:ID!): ChatRoom
     }
 
     type Mutation {
         login(username:String!, password:String!): Auth
         signup(username:String!, password:String!): Auth
+        addFriend(_id:ID!): User
+        removeFriend(_id:ID!): User
+        sendMessage(message: String!, roomId: ID!): ChatRoom
     }
 
     type Subscription {

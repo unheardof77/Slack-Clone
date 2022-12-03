@@ -1,13 +1,14 @@
 
 interface ChannelNames{
-    channelName: string
+    name: string;
+    _id: number;
 }
 
-export default function Channel({channelName}:ChannelNames){
+export default function Channel({name}:ChannelNames){
 
     return(
         <section>
-            <h2># {channelName}</h2>
+            <h2># {name}</h2>
         </section>
     )
 };
